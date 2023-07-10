@@ -5,5 +5,6 @@ wget --no-check-certificate http://github.com/kubernetes-sigs/kwok/releases/down
 chmod +x kwok-linux-amd64 && mv ./kwok-linux-amd64 /usr/bin/kwok
 
 COPY entrypoint.sh /usr/bin/entrypoint.sh
+RUN chmod +x /usr/bin/entrypoint.sh
 
 ENTRYPOINT entrypoint.sh
