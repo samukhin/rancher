@@ -2,7 +2,11 @@
 set -e
 
 tini -- rancher --http-listen-port=80 --https-listen-port=443 --audit-log-path=${AUDIT_LOG_PATH} --audit-level=${AUDIT_LEVEL} --audit-log-maxage=${AUDIT_LOG_MAXAGE} --audit-log-maxbackup=${AUDIT_LOG_MAXBACKUP} --audit-log-maxsize=${AUDIT_LOG_MAXSIZE} --add-local=true&
-sleep 5
+while [ ! -f /etc/rancher/k3s/k3s.yaml ]
+do
+echo "Not k3s.yaml"
+sleep 1
+done
 kwok \
   --kubeconfig=/etc/rancher/k3s/k3s.yaml \
   --manage-all-nodes=true
