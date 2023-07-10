@@ -9,3 +9,5 @@ mv ./kwokctl-linux-amd64 /usr/bin/kwokctl && chmod +x /usr/bin/kwokctl && \
 KWOK_KUBE_VERSION=v1.21.14 kwokctl -c /tmp/exec.yaml create cluster
 
 VOLUME /root/.kwok
+
+ENTRYPOINT entrypoint.sh
