@@ -1,0 +1,6 @@
+FROM rancher/rancher:v2.6.13
+
+COPY rancher /usr/bin
+RUN chmod +x /usr/bin/rancher
+
+COPY --from=samukhin/rancher:v2.5.17 /usr/share/rancher/ui /usr/share/rancher/ui
