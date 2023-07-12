@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+rm -f /etc/rancher/k3s/k3s.yaml
+
 k3s server --no-deploy traefik --no-deploy servicelb --no-deploy metrics-server --no-deploy local-storage --node-name local-node --log ./k3s.log --disable-agent&
 
 while [ ! -f /etc/rancher/k3s/k3s.yaml ]
