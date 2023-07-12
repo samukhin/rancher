@@ -11,6 +11,6 @@ kwok \
   --kubeconfig=/var/lib/rancher/kube_config_cluster.yml \
   --manage-all-nodes=true
   --disregard-status-with-annotation-selector=kwok.x-k8s.io/status=custom \
-  --disregard-statusq-with-label-selector= \
+  --disregard-status-with-label-selector= \
   --cidr=10.0.0.1/24 \
   --node-ip=10.0.0.1
