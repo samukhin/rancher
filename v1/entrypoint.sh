@@ -12,5 +12,6 @@ kwok \
   --manage-all-nodes=true \
   --disregard-status-with-annotation-selector=kwok.x-k8s.io/status=custom \
   --disregard-status-with-label-selector= \
-  --cidr=10.0.0.1/24 \
+  --cidr=10.42.0.1/24 \
   --node-ip=10.0.0.1
+  --node-lease-duration-seconds=4
