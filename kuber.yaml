@@ -1,0 +1,58 @@
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: rancher
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rancher
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: rancher
+  template:
+    metadata:
+      labels:
+        workload.user.cattle.io/workloadselector: rancher
+    spec:
+      containers:
+      - args:
+        - --k8s-mode=embedded
+        command:
+        - /usr/bin/rancher
+        env:
+        - name: CATTLE_SYSTEM_CATALOG
+          value: bundled
+        image: rancher/rancher:v2.3.11
+        name: rancher
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities: {}
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: false
+        stdin: true
+        tty: true
+        volumeMounts:
+        - mountPath: /etc/kubernetes
+          name: rancher
+          subPath: etc/kubernetes
+        - mountPath: /var/lib/rancher
+          name: rancher
+          subPath: var/lib/rancher
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      volumes:
+      - name: rancher
+        persistentVolumeClaim:
+          claimName: rancher
